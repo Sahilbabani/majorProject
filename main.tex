@@ -1,0 +1,239 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%----------------------ENTER NAMES HERE------------------------%
+%--------------------------------------------------------------%
+% IF THERE ARE LESS THAN 5 NAMES, LEAVE THE ADDITIONAL---------%
+% FILEDS BLANK, AND REMOVE LINES WITH \name and \roll in-------%
+% titlepage.tex, certificate.tex, recommendation.tex, % -------%
+% ----------------acknowledgement.tex--------------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\nameA{John Doe}
+\def\rollA{0801CSXXXXXX}
+
+\def\nameB{Jane Doe}
+\def\rollB{0801CSXXXXXX}
+
+\def\nameC{Mary Jane}
+\def\rollC{0801CSXXXXXX}
+
+\def\nameD{Adam Jane}
+\def\rollD{0801CSXXXXXX}
+
+\def\nameE{Eve Doe}
+\def\rollE{0801CSXXXXXX}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%--------------------ENTER GUIDE NAMES HERE--------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\guide{Dr. ABC XYZ}
+\def\desigGuide{Designation}
+
+\def\coguide{Ms. ABC DEF}
+\def\desigCoGuide{Designation}
+
+\def\projectTitle{``Project Title''}
+\def\projectSubtitle{[Sub title/Small description if any]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%-----------------DO NOT EDIT ANYTHING BELOW-------------------%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% \documentclass[12pt, twoside]{report}
+\documentclass[12pt]{report}
+\usepackage[a4paper, top=25mm, bottom=25mm, left=12mm, right=12mm,bindingoffset=6mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc} % to use typefaces %
+\usepackage[document]{ragged2e}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{fancyhdr}
+\usepackage[section]{placeins}
+\usepackage{amsmath}
+\usepackage{titlesec}
+\usepackage{setspace}
+\usepackage{lipsum}
+\usepackage{mathptmx} % Times font %
+\usepackage[export]{adjustbox}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{minted}
+\usepackage[
+    backend=biber,
+    style=ieee,
+    sorting=ynt,
+    urldate=long
+]{biblatex}
+\usepackage[none]{hyphenat}
+\usepackage{hyperref}       % to allow clickable links in toc
+\usepackage[toc]{appendix}
+\usepackage{etoolbox}
+\apptocmd{\thebibliography}{\csname phantomsection\endcsname\addcontentsline{toc}{chapter}{\bibname}}{}{}
+
+
+
+% \usepackage[T1]{fontenc}
+% \usepackage{mathptmx}
+% \usepackage[style=ieee,backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+% to fix empty brackets in references
+\usepackage{xpatch}
+\xpatchbibdriver{online}
+  {\printtext[parens]{\usebibmacro{date}}}
+  {\iffieldundef{year}
+    {}
+    {\printtext[parens]{\usebibmacro{date}}}}
+  {}
+  {\typeout{There was an error patching biblatex-ieee (specifically, ieee.bbx's @online driver)}}
+
+
+\title{
+    {Voice Based Assistant for Visually Impaired}\\
+    {\large Shri G.S. Institute of Technology and Science}\\
+    {\includegraphics{logo.png}}
+}
+\author{Author Names}
+\date{Day Month Year}
+
+\begin{document}
+\justifying         % Jutify the entire document %
+\sloppy             % Allow latex to insert spaces to justify %
+\pagenumbering{roman}
+\urlstyle{same}
+
+\input{titlepage.tex}
+
+
+\titleformat{\chapter}[display]
+  {\normalfont\LARGE\bfseries\centering}
+  {\MakeUppercase{\chaptertitlename}\ \thechapter:}
+  {.5em}
+  {\MakeUppercase}{\Large}
+
+
+
+\addcontentsline{toc}{chapter}{\numberline{}Recommendation}%
+\input{recommendation.tex}
+
+
+\addcontentsline{toc}{chapter}{\numberline{}Certificate}%
+\input{certificate.tex}
+% Restore default title spacing %
+
+\chapter*{Acknowledgement}
+\addcontentsline{toc}{chapter}{\numberline{}Acknowledgements}%
+\input{acknowledgement.tex}
+
+\chapter*{Abstract}
+\addcontentsline{toc}{chapter}{\numberline{}Abstract}%
+\input{abstract.tex}
+
+
+\tableofcontents
+
+\listoffigures
+
+\listoftables
+
+\titleformat{\chapter}[display]
+  {\bfseries\huge\raggedleft}
+  {\Large\chaptertitlename\ \thechapter}
+  {3ex}
+  {\titlerule\vspace{1.5ex}\filright}
+  [\vspace{1ex}\titlerule\filright]
+ 
+% \titleformat*{\section}{\Large\bfseries}
+% \titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+% \titleformat*{\subsection}{\large\bfseries}
+\titlespacing*{\subsection}{30pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\renewcommand{\baselinestretch}{1.15}
+\titleformat*{\section}{\LARGE\bfseries}
+\titleformat*{\subsection}{\Large\bfseries}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\nouppercase{\leftmark}}
+\fancyfoot[R]{\thepage}
+\fancyfoot[L]{Department of Computer Engineering, SGSITS Indore}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\chapter{Introduction}
+\pagenumbering{arabic}
+\input{chapters/introduction}
+
+\chapter{Background}
+\input{chapters/background}
+
+\chapter{Literature Review}
+\input{chapters/literature_review}
+
+\chapter{Analysis}
+\input{chapters/analysis}
+ 
+\chapter{Design}
+\input{chapters/design}
+
+\chapter{Implementation}
+\input{chapters/implementation.tex}
+
+\chapter{Testing \& Results}
+\input{chapters/testing.tex}
+ 
+\chapter{Conclusion}
+\input{chapters/conclusion}
+
+% \chapter{Sample Chapter}
+% \input{chapters/sample}
+
+% \appendix
+% \chapter{Appendix Title}
+% \input{chapters/appendix}
+
+%-----------------------------------------------------%
+%-The following command will print bibliography cited in the document(using the cite command) and which are present in the file references.bib
+% A sample reference is added in the file references.bib
+%-----------------------------------------------------%
+
+% \addcontentsline{toc}{chapter}{\numberline{}Abstract}%
+\renewcommand\bibname{References}
+\clearpage
+\addcontentsline{toc}{chapter}{References}
+\phantomsection
+\printbibliography
+
+
+
+
+\begin{appendices}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\makeatletter
+\addtocontents{toc}{%
+  \begingroup
+  \let\protect\l@chapter\protect\l@section
+  \let\protect\l@section\protect\l@subsection
+}
+\makeatother
+  \chapter{Project Related Concepts}
+  \input{appendix/project_concepts.tex}
+  
+  \chapter{User Mannual}
+  \input{appendix/user_mannual.tex}
+  
+  \chapter{Screenshots}
+  \input{appendix/screenshots.tex}
+  
+  \chapter{Glossary}
+  \input{appendix/glossary.tex}
+  
+  \chapter{Code}
+  \input{appendix/code.tex}
+\addtocontents{toc}{\endgroup}
+\end{appendices}
+
+\end{document}
+
+
